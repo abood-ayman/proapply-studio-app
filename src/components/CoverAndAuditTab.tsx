@@ -13,15 +13,17 @@ import {
   Trash2,
 } from 'lucide-react';
 import type { TranslationDictionary } from '../i18n/translations';
-import type { AuditReport, CoverLetterResult } from '../types';
+import type { AuditReport, CoverLetterResult, CvProfile } from '../types';
 import { SAMPLE_PORTAL_REVIEW_TEXT, summarizeAuditCounts } from '../utils/formAuditParser';
 
 interface CoverAndAuditTabProps {
   t: TranslationDictionary;
+  profile: CvProfile;
   coverLetter: CoverLetterResult | null;
   isDraftingLetter: boolean;
   letterError: string | null;
   onGenerateCoverLetter: (jobAd: string, companyName: string) => Promise<void>;
+  onBuildTemplateCoverLetter: (companyName: string, jobTitle: string) => void;
   onUpdateCoverLetter: (next: CoverLetterResult) => void;
   onCopyCoverLetter: () => Promise<void>;
   onDownloadCoverLetterTxt: () => void;
@@ -30,14 +32,17 @@ interface CoverAndAuditTabProps {
   isAuditing: boolean;
   auditError: string | null;
   onRunAudit: (formText: string) => Promise<void>;
+  onRunOfflineAudit: (formText: string) => void;
 }
 
 export const CoverAndAuditTab: React.FC<CoverAndAuditTabProps> = ({
   t,
+  profile,
   coverLetter,
   isDraftingLetter,
   letterError,
   onGenerateCoverLetter,
+  onBuildTemplateCoverLetter,
   onUpdateCoverLetter,
   onCopyCoverLetter,
   onDownloadCoverLetterTxt,
@@ -46,9 +51,11 @@ export const CoverAndAuditTab: React.FC<CoverAndAuditTabProps> = ({
   isAuditing,
   auditError,
   onRunAudit,
+  onRunOfflineAudit,
 }) => {
   const [subTab, setSubTab] = useState<'cover' | 'audit'>('cover');
   const [companyName, setCompanyName] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
   const [jobDesc, setJobDesc] = useState('');
   const [formText, setFormText] = useState('');
 
@@ -57,8 +64,8 @@ export const CoverAndAuditTab: React.FC<CoverAndAuditTabProps> = ({
   return (
     <div className="space-y-6">
       <div role="status" className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-        AI features are turned off in this public build. Cover letter generation and form review are unavailable for now.
-        <span dir="rtl" className="block mt-1">ميزات الذكاء الاصطناعي متوقفة حاليا في هذه النسخة العامة.</span>
+        AI features are turned off in this public build. The cover letter builder works without AI, using only your own profile data.
+        <span dir="rtl" className="block mt-1">ميزات الذكاء الاصطناعي متوقفة في هذه النسخة العامة. منشئ خطاب التغطية يعمل بدون ذكاء اصطناعي، من بياناتك فقط.</span>
       </div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -129,6 +136,31 @@ export const CoverAndAuditTab: React.FC<CoverAndAuditTabProps> = ({
                 className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] focus:border-[#1E3A8A] focus:bg-white focus:outline-none"
               />
             </div>
+
+            <div>
+              <label htmlFor="cover-job-title" className="block text-xs font-semibold text-[#0F172A] mb-1.5">
+                {t.coverAndAudit.cover.jobTitleLabel}
+              </label>
+              <input
+                id="cover-job-title"
+                type="text"
+                dir="auto"
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
+                placeholder={t.coverAndAudit.cover.jobTitlePlaceholder}
+                className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2 text-sm text-[#0F172A] focus:border-[#1E3A8A] focus:bg-white focus:outline-none"
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => onBuildTemplateCoverLetter(companyName, jobTitle)}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#1E40AF] transition-colors"
+            >
+              <FileText className="h-4 w-4" />
+              <span>{t.coverAndAudit.cover.templateButton}</span>
+            </button>
+            <p className="text-xs text-slate-500">{t.coverAndAudit.cover.templateNote}</p>
 
             <button
               type="button"
@@ -283,6 +315,15 @@ export const CoverAndAuditTab: React.FC<CoverAndAuditTabProps> = ({
               placeholder={t.coverAndAudit.reviewer.inputPlaceholder}
               className="w-full rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F172A] placeholder:text-slate-400 focus:border-[#1E3A8A] focus:bg-white focus:outline-none"
             />
+
+            <button
+              type="button"
+              onClick={() => onRunOfflineAudit(formText)}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#1E3A8A] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#1E40AF] transition-colors"
+            >
+              <FileSearch className="h-4 w-4" />
+              <span>{t.coverAndAudit.reviewer.offlineAuditButton}</span>
+            </button>
 
             <button
               type="button"
