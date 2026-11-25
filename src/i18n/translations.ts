@@ -120,9 +120,14 @@ export interface TranslationDictionary {
     cover: {
       companyLabel: string;
       companyPlaceholder: string;
+      jobTitleLabel: string;
+      jobTitlePlaceholder: string;
       jobDescLabel: string;
       jobDescPlaceholder: string;
       generateButton: string;
+      templateButton: string;
+      templateNote: string;
+      profileMissingNote: string;
       generating: string;
       subjectLabel: string;
       bodyLabel: string;
@@ -138,6 +143,8 @@ export interface TranslationDictionary {
       loadSample: string;
       clearInput: string;
       auditButton: string;
+      offlineAuditButton: string;
+      offlineDone: string;
       auditing: string;
       resultsTitle: string;
       emptyTitle: string;
@@ -326,17 +333,22 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
       cover: {
         companyLabel: 'Target Organization (Optional)',
         companyPlaceholder: 'e.g. Example Co, Sample Org',
+        jobTitleLabel: 'Job Title (Optional)',
+        jobTitlePlaceholder: 'e.g. Data Entry Specialist',
         jobDescLabel: 'Target Job Description',
         jobDescPlaceholder: 'Paste the job posting or role responsibilities here...',
         generateButton: 'Generate Cover Letter (AI off)',
+        templateButton: 'Build from my profile (no AI)',
+        templateNote: 'Built only from the details you entered in the CV Builder tab. Fully editable before export.',
+        profileMissingNote: 'Fill in your details in the CV Builder tab first, then build the letter.',
         generating: 'Drafting Letter...',
         subjectLabel: 'Email / Application Subject',
         bodyLabel: 'Editable Cover Letter (English)',
         copyButton: 'Copy Text',
         downloadTxt: 'Download .TXT',
         downloadPdf: 'Download PDF',
-        emptyTitle: 'Cover letter drafting is turned off',
-        emptySubtitle: 'This feature needs AI, which is turned off in this public build. Nothing you type here is sent anywhere.',
+        emptyTitle: 'Build your cover letter',
+        emptySubtitle: 'The AI drafter is turned off in this public build, but you can build a letter from your profile, then edit and export it. Nothing you type here is sent anywhere.',
       },
       reviewer: {
         inputLabel: 'Application Final Review Text',
@@ -344,10 +356,12 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
         loadSample: 'Load Sample Review',
         clearInput: 'Clear Text',
         auditButton: 'Form audit (AI turned off)',
+        offlineAuditButton: 'Check answers (no AI)',
+        offlineDone: 'Review ready. Check the findings before you submit.',
         auditing: 'Auditing Answers...',
         resultsTitle: 'Audit Findings',
-        emptyTitle: 'Form review is turned off',
-        emptySubtitle: 'This feature needs AI, which is turned off in this public build. Nothing you type here is sent anywhere.',
+        emptyTitle: 'Check your form answers',
+        emptySubtitle: 'The AI auditor is turned off in this public build, but the offline checker flags risky or blank answers. Nothing you type here is sent anywhere.',
         criticalLabel: 'Critical',
         warningLabel: 'Warning',
         okLabel: 'OK',
@@ -530,17 +544,22 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
       cover: {
         companyLabel: 'اسم الجهة / الشركة (اختياري)',
         companyPlaceholder: 'مثال: Example Co، Sample Org',
+        jobTitleLabel: 'المسمى الوظيفي (اختياري)',
+        jobTitlePlaceholder: 'مثال: Data Entry Specialist',
         jobDescLabel: 'الوصف الوظيفي المستهدف',
         jobDescPlaceholder: 'الصق إعلان الوظيفة أو المسؤوليات هنا...',
         generateButton: 'إنشاء خطاب التغطية (متوقف)',
+        templateButton: 'إنشاء من بياناتي (بدون ذكاء اصطناعي)',
+        templateNote: 'يُبنى فقط من البيانات التي أدخلتها في تبويب السيرة الذاتية، ويمكنك تعديله قبل التصدير.',
+        profileMissingNote: 'املأ بياناتك في تبويب السيرة الذاتية أولاً ثم أنشئ الخطاب.',
         generating: 'جاري الصياغة...',
         subjectLabel: 'عنوان البريد / الطلب',
         bodyLabel: 'نص خطاب التغطية (قابل للتعديل)',
         copyButton: 'نسخ النص',
         downloadTxt: 'تنزيل .TXT',
         downloadPdf: 'تنزيل PDF',
-        emptyTitle: 'صياغة خطاب التغطية متوقفة',
-        emptySubtitle: 'هذه الميزة تحتاج الذكاء الاصطناعي وهو متوقف في هذه النسخة العامة. لا يُرسل أي شيء تكتبه هنا.',
+        emptyTitle: 'أنشئ خطاب التغطية',
+        emptySubtitle: 'الصياغة بالذكاء الاصطناعي متوقفة في هذه النسخة العامة، لكن يمكنك إنشاء الخطاب من بياناتك ثم تعديله وتصديره. لا يُرسل أي شيء تكتبه هنا.',
       },
       reviewer: {
         inputLabel: 'نص صفحة المراجعة النهائية للاستمارة',
@@ -548,10 +567,12 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
         loadSample: 'تحميل نموذج تجريبي',
         clearInput: 'مسح النص',
         auditButton: 'تدقيق الاستمارة (الذكاء الاصطناعي متوقف)',
+        offlineAuditButton: 'راجع الإجابات (بدون ذكاء اصطناعي)',
+        offlineDone: 'المراجعة جاهزة. راجع الملاحظات قبل الإرسال.',
         auditing: 'جاري التدقيق...',
         resultsTitle: 'نتائج التدقيق',
-        emptyTitle: 'مراجعة الاستمارة متوقفة',
-        emptySubtitle: 'هذه الميزة تحتاج الذكاء الاصطناعي وهو متوقف في هذه النسخة العامة. لا يُرسل أي شيء تكتبه هنا.',
+        emptyTitle: 'راجع إجابات استمارتك',
+        emptySubtitle: 'المراجعة بالذكاء الاصطناعي متوقفة في هذه النسخة العامة، لكن المراجعة بدون إنترنت تكشف الإجابات الخطرة أو الفارغة. لا يُرسل أي شيء تكتبه هنا.',
         criticalLabel: 'حرج',
         warningLabel: 'تحذير',
         okLabel: 'سليم',
@@ -615,4 +636,3 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
     },
   },
 };
-
