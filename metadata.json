@@ -1,0 +1,8 @@
+{
+  "name": "ProApply Studio",
+  "description": "Public career preparation and official document formatting suite for job applicants, featuring an Instant single-page English ATS CV builder, strict A4 National ID card merger, certificates PDF portfolio bundler, and offline PWA support. AI features are turned off in this public build.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
