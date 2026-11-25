@@ -38,7 +38,9 @@ import {
   mergeProfile,
   applyTailoredProfile,
 } from './utils/cvLayout';
+import { buildTemplateCoverLetter, isProfileEmpty } from './utils/coverLetterBuilder';
 import { buildAuditReport } from './utils/formAuditParser';
+import { auditFormOffline } from './utils/offlineFormAudit';
 import { renderProcessedCardCanvas } from './utils/idMergerMath';
 import {
   generateApplicationBundleZip,
@@ -250,6 +252,16 @@ export default function App() {
     }
   };
 
+  const handleBuildTemplateCoverLetter = (companyName: string, jobTitle: string) => {
+    setLetterError(null);
+    const result = buildTemplateCoverLetter(profile, { companyName, jobTitle });
+    setCoverLetter(result);
+    addToast(
+      isProfileEmpty(profile) ? t.coverAndAudit.cover.profileMissingNote : t.toasts.coverLetterGenerated,
+      isProfileEmpty(profile) ? 'info' : 'success'
+    );
+  };
+
   const handleCopyCoverLetter = async () => {
     if (!coverLetter) return;
     const text = `${coverLetter.subjectLine}\n\n${coverLetter.letterBody}`;
@@ -276,6 +288,16 @@ export default function App() {
     const { doc, filename } = generateCoverLetterPdf(profile, coverLetter);
     doc.save(filename);
     addToast(t.toasts.coverLetterPdfGenerated, 'success');
+  };
+
+  const handleRunOfflineAudit = (formText: string) => {
+    if (!formText.trim()) {
+      addToast(t.toasts.missingFormText, 'error');
+      return;
+    }
+    setAuditError(null);
+    setAuditReport(auditFormOffline(formText, lang));
+    addToast(t.coverAndAudit.reviewer.offlineDone, 'success');
   };
 
   const handleRunAudit = async (formText: string) => {
@@ -495,10 +517,12 @@ export default function App() {
           {activeTab === 'cover-and-audit' && (
             <CoverAndAuditTab
               t={t}
+              profile={profile}
               coverLetter={coverLetter}
               isDraftingLetter={isDraftingLetter}
               letterError={letterError}
               onGenerateCoverLetter={handleGenerateCoverLetter}
+              onBuildTemplateCoverLetter={handleBuildTemplateCoverLetter}
               onUpdateCoverLetter={setCoverLetter}
               onCopyCoverLetter={handleCopyCoverLetter}
               onDownloadCoverLetterTxt={handleDownloadCoverLetterTxt}
@@ -507,6 +531,7 @@ export default function App() {
               isAuditing={isAuditing}
               auditError={auditError}
               onRunAudit={handleRunAudit}
+              onRunOfflineAudit={handleRunOfflineAudit}
             />
           )}
 
