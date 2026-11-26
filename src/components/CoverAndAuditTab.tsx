@@ -64,8 +64,8 @@ export const CoverAndAuditTab: React.FC<CoverAndAuditTabProps> = ({
   return (
     <div className="space-y-6">
       <div role="status" className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-        AI features are turned off in this public build. The cover letter builder works without AI, using only your own profile data.
-        <span dir="rtl" className="block mt-1">ميزات الذكاء الاصطناعي متوقفة في هذه النسخة العامة. منشئ خطاب التغطية يعمل بدون ذكاء اصطناعي، من بياناتك فقط.</span>
+        AI features are turned off in this public build. The cover letter builder and form checker work offline, using only your own data.
+        <span dir="rtl" className="block mt-1">ميزات الذكاء الاصطناعي متوقفة في هذه النسخة العامة. منشئ الخطاب ومراجع الاستمارة يعملان بدون إنترنت، من بياناتك فقط.</span>
       </div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
