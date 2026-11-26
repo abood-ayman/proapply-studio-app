@@ -326,8 +326,8 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
       pageCountLabel: 'Total Pages',
     },
     coverAndAudit: {
-      heading: 'Cover Letter & Form Checker (AI turned off)',
-      subheading: 'Cover letter and form review use AI and are turned off in this public build.',
+      heading: 'Cover Letter & Form Checker (offline, no AI)',
+      subheading: 'Build a cover letter and check form answers offline. AI features stay off in this public build; nothing you type is sent anywhere.',
       tabCoverLetter: 'Cover Letter Generator',
       tabFormChecker: 'Application Form Reviewer',
       cover: {
@@ -537,8 +537,8 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
       pageCountLabel: 'إجمالي الصفحات',
     },
     coverAndAudit: {
-      heading: 'خطاب التغطية ومراجع الاستمارة (الذكاء الاصطناعي متوقف)',
-      subheading: 'ميزات خطاب التغطية ومراجعة الاستمارة تعتمد على الذكاء الاصطناعي وهي متوقفة في هذه النسخة العامة.',
+      heading: 'خطاب التغطية ومراجع الاستمارة (بدون إنترنت، بدون ذكاء اصطناعي)',
+      subheading: 'أنشئ خطاب التغطية وراجع إجابات الاستمارة بدون إنترنت. ميزات الذكاء الاصطناعي متوقفة في هذه النسخة العامة، ولا يُرسل أي شيء تكتبه.',
       tabCoverLetter: 'منشئ خطاب التغطية',
       tabFormChecker: 'مراجع استمارة التقديم',
       cover: {
@@ -636,3 +636,4 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDictionary> = {
     },
   },
 };
+
